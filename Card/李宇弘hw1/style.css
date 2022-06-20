@@ -1,0 +1,49 @@
+html,body{
+  background-color:lightyellow; /*lightyellow;*/
+  color: lightblue;
+  display:flex;
+justify-content: center;
+align-items: center;
+  }
+.LevelNum{
+  font-size:30px;
+  margin:100px 0 0 -10px;
+  color:rgb(100,100,255)
+}
+button{
+  display:flex-direction;
+  justify-content: center;
+  align-items: center;
+}
+.row{
+  display:flex;
+  justify-content:center;
+  align-items:center; 
+}
+h1{
+  position:absolute;
+  left:40px;
+  top:100px;
+}
+.card{
+  background-color: rgb(240,100,100);
+display: flex;
+  margin:30px;
+  border:solid 2px red;
+  width: 100px;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+  font-size:20px;
+}
+.cards .card:hover {
+/* background-color:lightgreen; */
+box-shadow: 0px 0px 35px rgba(0, 255, 0, 0.6);
+background-color: rgba(0, 255, 0, 0.2);
+color:red;
+ border:solid 2px rgb(100,255,100);
+}
+.cards .card:active,.cards .card.active {
+background-color: #fff;
+color: black;
+}

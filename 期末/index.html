@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./style.css">
+    
+</head>
+<body>
+    <div id="app">
+        <div class="title">Movie Ordering</div>
+        <div class="movie" @wheel.prevent="wheel($event)">
+            
+
+            <!--  -->
+                <div class="cards" v-if="movies.length!=0">
+
+                    <div class="card" v-for="movie in movies">
+                            <div class="left" >
+                                <!-- 左邊的圖片 -->
+                                <!-- <img :src="movie.cover" style="width: 200px"/> 方法一(在圖案都一樣的大小情況之下可以這樣做)-->
+                                <div class="cover" :style="bgcss(movie.cover)">
+                                    <!-- 處理照片 -->
+                                </div>                    
+                                <h2 :class="{red:movie.soldout}" style="position: relative; bottom: 30px;" class="posi">剩餘:{{movie.left}}
+                                    <div class="red Sout" v-if="movie.soldout"><span>已完售</span></div>
+                                </h2>
+                            </div> 
+
+
+                            <div class="right" >
+                                <h2>{{movie.name}}</h2>
+                                <h4>{{movie.type}}</h4>
+                                <!-- <p>{{movie.description}} 兩種寫法</p>  -->
+                                <p v-html="movie.description"></p>
+                                <div class="price">${{movie.price}}</div> 
+                                <span>QTY</span>
+                                <input  type="number" style="width:35px" v-model="number"  min="1">
+                                <button class="add" @click="addCart(movie , $event )">+ Add to cart</button>
+                                
+                            </div>   <!-- 右邊的文字說明 -->
+                        
+                
+                        </div>
+                </div>
+                <div class="cardNONO" v-else>
+                </div>
+
+
+        </div>
+
+        <!-- 新增點選的動畫 -->
+        <div class="buybox" :style="bgcss(currentMovie.cover)" v-if=" currentMovie"></div>
+
+        <!-- cart -->
+        <div class="fixed-control"  @click="cartopen">
+            <p>
+                <i class="fas fa-shopping-cart"></i>
+                <span>{{cart.length}}</span>
+            </p>
+        </div>
+        <div class="control" v-if="isCartOpen">
+            <div class="panel" v-if="!isCheckOpen">
+                
+                <h2 style="display: flex; justify-content: space-between;">Movie Cart
+                    <div v-model="movies" @click="removeAll()" class="removeall">Clear Cart
+                        <i class="bi bi-arrow-repeat" style="font-size: 30px;"></i>       
+                    </div>
+                </h2>
+                <ul>
+                    <li v-for="(movie,mid) in cart">
+                        <div class="thumbnail" :style="bgcss(movie.cover)"></div>
+                        <h3>{{movie.name}}_________共{{movie.howmany}}部
+                            <div class="delete" @click="del(movie)">
+                                <i class="fa-solid fa-ban"  ></i>
+                            </div>
+                        </h3>
+                        
+                        <div class="adjustCart">
+                            <button v-model="movie.howmany" @click="addORreduce(movie,0)" 
+                            style="font-size: 20px;height: 30px; width:27px ">-</button> 
+                            {{movie.howmany}} 
+                            <button v-model="movie.howmany" @click="addORreduce(movie,1)" 
+                            style="font-size: 20px; height: 30px;">+</button>
+                             
+                        </div>
+                        <div class="price">
+                            <h3>  ${{movie.price}}</h3>
+                        </div>
+                    </li>
+                    <li v-if="!cart.length">
+                        <h3>Empty Cart</h3>
+                    </li> 
+                </ul>
+
+                <hr>
+
+                <h2 style="display: flex; font-size: 30px;justify-content: space-between;">
+                    Total:  {{totalPrice}} $
+                    <div class="check" style="font-size: 40px;" @click="buyIt()"  >
+                        <i>→→</i>
+                        <i class="bi bi-basket2"></i>    
+                    </div>
+                </h2>
+
+                
+            </div>
+
+            
+            
+                
+        <!-- check out -->
+                
+                <div class="checkout" v-if="isCheckOpen">
+
+                    <div class="back" @click="goback()">
+                        <i class="bi bi-arrow-90deg-left">back</i>
+                    </div>
+
+                    <div class="pay">
+                        <h1> Checkout</h1>
+                        <h3>You order {{cart.length}} movie(s)</h3>
+                        <h1> Total:${{totalPrice}}</h1>
+                    </div>
+
+                    <div class="checkback" @click="butIt2end()">
+                        <i class="bi bi-basket2">Buy</i>                
+                    </div> 
+                </div>
+        </div>
+
+        <div class="search" >
+            <span style="color:rgb(250, 244, 244);font-size: 29px">搜尋</span>
+            <input type="text" v-model="Nsearch" >
+            <button @click="foundORnot(0)">search</button>
+            <button @click="create()">顯示所有</button>
+        </div> 
+       
+
+        <div class="edit">
+            <span style="display: flex;">editor</span>            
+            <input type="checkbox"   v-model="editorpanel"></input>
+        </div>
+
+        <div class="editor"  v-if="editorpanel">
+            <span style="color: white; font-size: 29px; ">庫存:</span>
+            <div class="left2">
+                <div class="list"v-for="movie in movies">
+                    <span >{{movie.name}} :</span>
+                    <input type="number" style="color:wheat;background-color: black; width:90px;height: 30px; font-size: 24px;" v-model="movie.left" min="0">
+                    <input type="checkbox" v-model="movie.soldout" @click="CheckSoldOut(movie)">已完售</input>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>        <!-- #app -->
+
+
+
+
+
+
+
+
+<!-- js/jq connet -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
+
+<script src="./script.js"></script>
+
+</body>
+</html>
