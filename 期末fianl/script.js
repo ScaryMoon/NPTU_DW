@@ -12,7 +12,8 @@ var vm = new Vue({
         editorpanel:false,
         tempMovie:[],
         BeforeSearchMovie:[],
-        AfterBuy:[]
+        AfterBuy:[],
+        find:true
     },
 
     //取得電影資料
@@ -23,6 +24,7 @@ var vm = new Vue({
 
     methods: {
         create(){
+            this.find=true
             this.tempMovie=this.movies  
             // console.log("create: tempMovie",this.tempMovie)
             let apiUrl ="movie.json"//資料內容在哪裡
@@ -263,18 +265,29 @@ var vm = new Vue({
 
 
         foundORnot(){
+            found=false
             if(this.Nsearch!='' ){
                 this.movies.forEach((m)=>{
                     // console.log(this.movies)
-                    if(m.name.includes(this.Nsearch)!=true){
+                    if(m.name.includes(this.Nsearch)!=true){      
                         m.hide=true
-                    }      
+                    }
+                       
                 })
-            }else{
-                // 
-                this.create()
+            }else{ 
+                this.create()                
                 console.log("hihi")//ok
             }
+            this.movies.forEach((m)=>{
+                if(m.hide==false){
+                    found==true
+                }
+            })
+            if(found==false){
+                this.find=false
+                alert("商品未找到")
+            }
+
         },
 
         doo(){
