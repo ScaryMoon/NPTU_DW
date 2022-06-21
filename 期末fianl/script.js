@@ -269,8 +269,10 @@ var vm = new Vue({
             if(this.Nsearch!='' ){
                 this.movies.forEach((m)=>{
                     // console.log(this.movies)
-                    if(m.name.includes(this.Nsearch)!=true){      
+                    if(m.name.includes(this.Nsearch)==false){      
                         m.hide=true
+                    }else{
+                        found=true
                     }
                        
                 })
@@ -278,11 +280,7 @@ var vm = new Vue({
                 this.create()                
                 console.log("hihi")//ok
             }
-            this.movies.forEach((m)=>{
-                if(m.hide==false){
-                    found==true
-                }
-            })
+            
             if(found==false){
                 this.find=false
                 alert("商品未找到")
