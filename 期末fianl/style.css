@@ -439,4 +439,11 @@ body {
   box-shadow: 0px 5px 25px 5px rgba(255, 2, 2, 0.2);
 }
 
-
+.p{
+  width:auto; 
+  display: flex;
+  top:115px;
+  position: fixed;
+  z-index: 1;
+  right: 30px;
+}

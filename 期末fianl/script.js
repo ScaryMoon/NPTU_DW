@@ -24,7 +24,7 @@ var vm = new Vue({
     methods: {
         create(){
             this.tempMovie=this.movies  
-            console.log("create: tempMovie",this.tempMovie)
+            // console.log("create: tempMovie",this.tempMovie)
             let apiUrl ="movie.json"//資料內容在哪裡
             axios.get(apiUrl).then(res=>{
                 this.movies=res.data //抓到資料後丟到movies裡面
@@ -42,7 +42,7 @@ var vm = new Vue({
                     })
                 }
             })
-            console.log("now movies",this.movies)
+            // console.log("now movies",this.movies)
             this.Nsearch=''
             
         },
@@ -67,11 +67,20 @@ var vm = new Vue({
         
 
         addCart(movie,evt){
-            if(this.number>=0&& this.number<=movie.left&&  (this.cart.includes(movie) == false)){//add2cart 第一次加入
-                console.log("o no")
-                this.doOneTime(movie,evt)
+            carFlag=false
+            this.cart.forEach((car)=>{
+                if(car.index==movie.index){
+                    carFlag=true
+                    movie=car
+                }
+            })
+            number=parseInt(this.number)
+            if(number>=0&& number<=movie.left&&  (carFlag == false)){//add2cart 第一次加入
+                console.log("o no in cart")
+                // console.log("movie.name",movie.name,"T/F",this.cart.includes(movie.name))
+                this.doOneTime(movie,evt,number)
             }
-            else if ((this.number>=0&& this.cart.includes(movie) == true) && this.number+movie.howmany<=movie.left){
+            else if ((number>=0&& carFlag== true) && number+movie.howmany<=movie.left){
                 console.log("movie in this cart!")
                 this.currentMovie=movie
                 //要知道位置才能讓動畫跑
@@ -92,13 +101,16 @@ var vm = new Vue({
                     if (this.cart.length!=0){ //Q1
                         var flag=0
                         this.cart.forEach((ind)=>{
-                            console.log("index")
+                            console.log("index 2")
                             if (movie.index==ind.index){
-                                movie.howmany=movie.howmany+parseInt(this.number)
-                                console.log(movie.name,"+1")
-                                flag=1
-                                this.number=1
+                                if(ind.howmany+parseInt(this.number)<=ind.left){
+                                    ind.howmany=ind.howmany+parseInt(this.number)
+                                    console.log(ind.name,"+1")
+                                    flag=1
+                                    this.number=1
+                                }
                             }
+                            
                         })
                         if(flag==0){
                             movie.howmany=movie.howmany+parseInt(this.number)
@@ -106,6 +118,7 @@ var vm = new Vue({
                             this.cart.push(movie)
                             this.number=1
                         }
+                        
                     }
                     else{
                         movie.howmany=movie.howmany+parseInt(this.number)
@@ -115,18 +128,20 @@ var vm = new Vue({
                     }
                     
                 },400)
-            }else if (this.number<0){
+            }else if (number<0){
                 alert("不可以是負數")
                 this.number=1
             }
             else{
+                // console.log("this's 2 ",this.number>=0,carFlag== true,parseInt(this.number)+movie.howmany<=movie.left)
+                // console.log("mistake",parseInt(this.number),movie.howmany,movie.left)
                 this.number=1
                 alert('超過電影庫存數量了，請重新選擇數量')
             }
                 
             
         },
-        doOneTime(movie,evt){
+        doOneTime(movie,evt,number){
             this.currentMovie=movie
             //要知道位置才能讓動畫跑
             let target=evt.target//抓位置
@@ -146,23 +161,26 @@ var vm = new Vue({
                 if (this.cart.length!=0){ //Q1
                     var flag=0
                     this.cart.forEach((ind)=>{
-                        console.log("index")
+                        console.log("index 1time")
                         if (movie.index==ind.index){
-                            movie.howmany=movie.howmany+parseInt(this.number)
-                            console.log(movie.name,"+1")
-                            flag=1
-                            this.number=1
+                            if(ind.howmany+number<=ind.left){
+                                ind.howmany=ind.howmany+number
+                                console.log(ind.name,"+1")
+                                flag=1
+                                this.number=1
+                            }
                         }
+                        
                     })
                     if(flag==0){
-                        movie.howmany=movie.howmany+parseInt(this.number)
+                        movie.howmany=movie.howmany+number
                         console.log("push movie")
                         this.cart.push(movie)
                         this.number=1
                     }
                 }
                 else{
-                    movie.howmany=movie.howmany+parseInt(this.number)
+                    movie.howmany=movie.howmany+number
                     console.log("this.cart == null")
                     this.cart.push(movie)
                     this.number=1
@@ -224,13 +242,13 @@ var vm = new Vue({
                 m.hide=false
                 this.cart.forEach((c)=>{
                     if(m.index==c.index){
-                        console.log("before m",m.name,m.left,"c",c.name,c.left)
+                        // console.log("before m",m.name,m.left,"c",c.name,c.left)
                         m.left-=c.howmany
                         m.howmany=0
                         if(m.left==0){
                             m.soldout=true
                         }
-                        console.log("after m",m.name,m.left,"c",c.name,c.left)
+                        // console.log("after m",m.name,m.left,"c",c.name,c.left)
                     }
                 })
 
