@@ -14,7 +14,7 @@ body {
   font-family: 'cwTeXYen', serif;
 }
 
-#app {  
+#app {
 
   width: 100%;
   height: 100%;
@@ -51,7 +51,7 @@ body {
 }
 
 .card {
-  
+
   margin: 60px;
   width: 460px;
   height: auto;
@@ -64,7 +64,7 @@ body {
   box-shadow: 0px 5px 25px 5px rgba(0, 0, 0, 0.2);
   padding: 20px;
   padding-bottom: 0px;
-  
+
 }
 
 .card .left {
@@ -82,15 +82,15 @@ body {
 }
 
 .card .right {
-  
+
   flex: 2;
-  padding:16px;
+  padding: 16px;
   padding-top: 10px;
   padding-right: 14px;
 }
 
 .card .right h2 {
-  
+
   margin: 0;
   font-weight: bold;
   font-size: 24px;
@@ -214,7 +214,7 @@ body {
 .control ul li h3 {
   font-size: 17px;
   font-weight: normal;
-  display:flex;
+  display: flex;
   width: 100%;
   opacity: 0.8;
 }
@@ -236,9 +236,9 @@ body {
 }
 
 
-.adjustCart{
+.adjustCart {
   /* border:red solid 1px; */
-  margin: 0 10px 0 0 ;
+  margin: 0 10px 0 0;
   height: 50px;
   width: 90px;
   font-size: 20px;
@@ -247,7 +247,7 @@ body {
   align-items: center;
 }
 
-.delete{
+.delete {
   margin: 0 0 0 5px;
   height: 24px;
   width: 34px;
@@ -257,47 +257,55 @@ body {
   /* border: red solid 1px; */
   /* background-color:rgba(255,23,23,0.6); */
   /* border-radius: 50%; */
-  
+
   cursor: pointer;
 }
-.delete:hover{
+
+.delete:hover {
   color: red;
-} 
-.removeall{
-  display:inline;
+}
+
+.removeall {
+  display: inline;
   cursor: pointer;
 }
-.removeall:hover{
+
+.removeall:hover {
   color: rgb(155, 146, 146);
 }
-.check:hover{
+
+.check:hover {
   color: aquamarine;
   cursor: pointer;
 }
+
 .checkout {
   /* border: 1px solid red; */
   width: 500px;
   height: 300px;
   display: flex;
   background-color: #fff;
-  color:black;
+  color: black;
   justify-content: center;
   align-items: center;
   border-radius: 19%;
 
 }
-.back{
+
+.back {
   font-size: 30px;
   position: relative;
-  top:10vh;
+  top: 10vh;
   right: 3vh;
   cursor: pointer;
 }
-.back:hover{
+
+.back:hover {
   cursor: pointer;
-  color:rgb(141, 230, 9)
+  color: rgb(141, 230, 9)
 }
-.pay{
+
+.pay {
   /* border: 1px blue solid; */
   /* width: 600px; */
   /* display: flex; */
@@ -305,36 +313,40 @@ body {
   align-items: center;
   position: relative;
   left: 0px;
-} 
-.check span{
+}
+
+.check span {
   font-size: 30px;
 }
-.pay h1{
+
+.pay h1 {
   font-size: 40px;
 }
-.checkback{ 
+
+.checkback {
   position: relative;
-  top:10vh;
+  top: 10vh;
   left: 2vh;
   font-size: 30px;
-}  
-.checkback:hover{
+}
+
+.checkback:hover {
   cursor: pointer;
-  color:rgb(141, 230, 9)
+  color: rgb(141, 230, 9)
 }
 
 
 
 /* search */
-.search{
-  width:auto; 
+.search {
+  width: auto;
   /* height: 34px; */
   /* border: 1px red solid;  */
   /* background-color: #fff; */
   display: flex;
   /* position: absolute; */
   /* left:1550px; */
-  top:95px;
+  top: 95px;
   position: fixed;
   z-index: 1;
   /* position: fixed; */
@@ -342,11 +354,12 @@ body {
   /* top: 20px; */
 
 }
+
 /* .find{
   display:hidden;
 
 } */
-.cardNONO{ 
+.cardNONO {
   margin: 60px;
   width: 460px;
   height: 400px;
@@ -357,54 +370,57 @@ body {
   padding-bottom: 0px;
   background-image: url("https://w0.peakpx.com/wallpaper/90/124/HD-wallpaper-error-404-error-glitch-modern-new-sharp-thumbnail.jpg");
   background-size: 100%;
-  background-position:center;
+  background-position: center;
   border: 1px solid white;
-  left:635px;
-  top:200px;
-} 
+  left: 635px;
+  top: 150px;
+}
 
 
 
-.edit{
+.edit {
   /* border: solid 1px red; */
   position: absolute;
   display: flex;
-  width:200px;
-  height:100px;
+  width: 200px;
+  height: 100px;
   /* padding: 100px; */
   color: #bbb;
   top: 110px;
   left: 50px;
   font-size: 25px;
 }
-.edit input{
+
+.edit input {
   width: 25px;
   height: 25px;
 }
 
 
-.editor{
-  position:absolute;
+.editor {
+  position: absolute;
   z-index: 0;
-  bottom:0;
+  bottom: 0;
   left: 303px;
   width: 1300px;
   height: 250px;
-  margin:10px 30px 0 0;
- display: inline-block;
+  margin: 10px 30px 0 0;
+  display: inline-block;
   justify-content: center;
-  
+
 }
-.left2{
-  position:absolute;
+
+.left2 {
+  position: absolute;
   height: 250px;
   /* border: 1px solid pink; */
   width: 200px;
-  top:0px;
-  left:70px;
+  top: 0px;
+  left: 70px;
 }
-.list{
-  position:relative;
+
+.list {
+  position: relative;
   /* border: 1px solid blue; */
   color: wheat;
   width: 500px;
@@ -413,7 +429,8 @@ body {
   margin: 10px 40px 0 10px;
   font-size: 24px;
 }
-.posi{
+
+.posi {
   position: absolute;
   width: auto;
   height: 0;
@@ -422,28 +439,80 @@ body {
   font-size: 31px;
   /* border: 1px solid green; */
 }
-.red{
-  color: red;  
+
+.red {
+  color: red;
 }
-.Sout{
+
+.Sout {
   border: 7px solid red;
   transform: rotate(25deg);
   position: relative;
   bottom: 290px;
-  left:290px;
+  left: 290px;
   font-size: 100px;
   width: 93px;
   height: 300px;
   border-radius: 30px;
-  background-color: rgba(255,0,0,0.13);
+  background-color: rgba(255, 0, 0, 0.13);
   box-shadow: 0px 5px 25px 5px rgba(255, 2, 2, 0.2);
 }
 
-.p{
-  width:auto; 
+.p {
+  width: auto;
   display: flex;
-  top:115px;
+  top: 115px;
   position: fixed;
   z-index: 1;
   right: 30px;
+}
+
+.p1 {
+  width: auto;
+  display: flex;
+  top: 135px;
+  position: fixed;
+  z-index: 1;
+  right: 30px;
+  font-size: 18px;
+}
+
+.showWhereNotHide {
+  /* display: flex; */
+  position: absolute;
+  bottom: 230px;
+  /* right: 960px; */
+  left: 860px;
+  width: 150px;
+  height: 30px;
+  /* border: 1px blue solid; */
+  z-index: 4;
+}
+
+.lightON {
+  width: 10px;
+  height: 10px;
+  z-index: 4;
+  position: relative;
+  display: inline-block;
+  background-color: rgb(54, 252, 74);
+  margin: 10px 6px 3px 10px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  /* color:red; */
+  /* font-size: 40px; */
+}
+
+.lightOFF {
+  width: 10px;
+  height: 10px;
+  z-index: 4;
+  position: relative;
+  display: inline-block;
+  background-color: rgb(124, 96, 96);
+  margin: 10px 6px 3px 10px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }

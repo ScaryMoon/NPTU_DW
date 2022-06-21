@@ -140,6 +140,7 @@
             <button @click="create()">顯示所有</button>
         </div> 
         <p class="p"style="color: white;">tips:查詢後商品可能不會在中間 滾輪上:商品向右移動 滾輪下:商品向左移動 即可看到</p>
+        <p class="p1" style="color: white;">tips:查詢完後要按顯示所有</p>
        
 
         <div class="edit">
@@ -158,7 +159,10 @@
             </div>
         </div>
 
-
+        <div class="showWhereNotHide" >
+            <div class="lightON"v-for="movie in movies" v-if="movie.hide==false"></div>
+            <div class="lightOFF"v-for="movie in movies" v-if="movie.hide==true"></div>
+        </div>
 
 
 
