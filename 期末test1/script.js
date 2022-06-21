@@ -11,7 +11,8 @@ var vm = new Vue({
         Nsearch:'',
         editorpanel:false,
         tempMovie:[],
-        BeforeSearchMovie:[]
+        BeforeSearchMovie:[],
+        AfterBuy:[]
     },
 
     //取得電影資料
@@ -22,18 +23,18 @@ var vm = new Vue({
 
     methods: {
         create(){
-            // console.log("create",this.movies)
-            this.tempMovie=this.movies
+            this.tempMovie=this.movies  
+            console.log("create: tempMovie",this.tempMovie)
             let apiUrl ="movie.json"//資料內容在哪裡
             axios.get(apiUrl).then(res=>{
                 this.movies=res.data //抓到資料後丟到movies裡面
 
      
-                if (this.tempMovie != []){
+                if (this.tempMovie != []){//各項記錄下給新的movies
                     this.tempMovie.forEach((e)=>{
                         this.movies.forEach((m)=>{
                             if(m.index==e.index){
-                                // e.hide=false
+                                e.hide=false
                                 m.left=e.left
                                 m.soldout=e.soldout
                             }
@@ -41,6 +42,7 @@ var vm = new Vue({
                     })
                 }
             })
+            console.log("now movies",this.movies)
             this.Nsearch=''
             
         },
@@ -218,15 +220,21 @@ var vm = new Vue({
         butIt2end(){
             this.isCartOpen=false
             this.isCheckOpen=false
-            this.cart.forEach((m)=>{
-                m.left-=m.howmany
-                m.howmany=0
-                if(m.left==0){
-                    m.soldout=true
-                }
+            this.movies.forEach((m)=>{
+                m.hide=false
+                this.cart.forEach((c)=>{
+                    if(m.index==c.index){
+                        console.log("before m",m.name,m.left,"c",c.name,c.left)
+                        m.left-=c.howmany
+                        m.howmany=0
+                        if(m.left==0){
+                            m.soldout=true
+                        }
+                        console.log("after m",m.name,m.left,"c",c.name,c.left)
+                    }
+                })
+
             })
-            // this.tempMovie=this.cart
-            // console.log("this.tempMovie",this.tempMovie)
             this.cart=[]
         },
         goback(){
